@@ -1,0 +1,140 @@
+import type { CollectionConfig } from 'payload'
+
+export const Products: CollectionConfig = {
+  slug: 'products',
+  admin: {
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'currentPrice', 'rating', 'updatedAt'],
+  },
+  access: {
+    read: () => true,
+  },
+  fields: [
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+      label: 'Product Name',
+    },
+    {
+      name: 'image',
+      type: 'upload', 
+      relationTo: 'media',
+      required: true,
+      label: 'Product Image',
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      label: 'Product Description',
+      maxLength: 500,
+    },
+    {
+      name: 'rating',
+      type: 'number',
+      min: 0,
+      max: 5,
+      defaultValue: 0,
+      label: 'Rating (0-5 Stars)',
+      admin: {
+        step: 0.5,
+      },
+    },
+    {
+      name: 'price',
+      type: 'number',
+      required: true,
+      min: 0,
+      label: 'Price ($)',
+    },
+    {
+      name: 'discount',
+      type: 'number',
+      min: 0,
+      max: 100,
+      label: 'Discount (%) - Optional',
+      admin: {
+        description: 'Percentage discount (e.g., 20 for 20%)',
+      },
+    },
+    {
+      name: 'isNewArrival',
+      type: 'checkbox',
+      label: 'Is New Arrival?',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'isTopSelling',
+      type: 'checkbox',
+      label: 'Is Top Selling?',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'category',
+      type: 'select',
+      required: true,
+      label: 'Category',
+      options: [
+        { label: 'T-Shirts', value: 'tshirts' },
+        { label: 'Jeans', value: 'jeans' },
+        { label: 'Shirts', value: 'shirts' },
+        { label: 'Shorts', value: 'shorts' },
+        { label: 'Dresses', value: 'dresses' },
+        { label: 'Accessories', value: 'accessories' },
+      ],
+      hasMany: false,
+    },
+    {
+      name: 'colors',
+      type: 'select',
+      label: 'Available Colors',
+      hasMany: true,
+      options: [
+        { label: 'Green', value: 'green' },
+        { label: 'Red', value: 'red' },
+        { label: 'Yellow', value: 'yellow' },
+        { label: 'Orange', value: 'orange' },
+        { label: 'Cyan', value: 'cyan' },
+        { label: 'Blue', value: 'blue' },
+        { label: 'Purple', value: 'purple' },
+        { label: 'Pink', value: 'pink' },
+        { label: 'White', value: 'white' },
+        { label: 'Black', value: 'black' },
+      ],
+    },
+    {
+      name: 'sizes',
+      type: 'select',
+      label: 'Available Sizes',
+      hasMany: true,
+      options: [
+        { label: 'XX-Small', value: 'xx_small' },
+        { label: 'X-Small', value: 'x_small' },
+        { label: 'Small', value: 'small' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'Large', value: 'large' },
+        { label: 'X-Large', value: 'x_large' },
+        { label: 'XX-Large', value: 'xx_large' },
+        { label: '3X-Large', value: 'three_x_large' },
+        { label: '4X-Large', value: 'four_x_large' },
+      ],
+    },
+    {
+      name: 'style',
+      type: 'select',
+      label: 'Dress Style',
+      options: [
+        { label: 'Casual', value: 'casual' },
+        { label: 'Formal', value: 'formal' },
+        { label: 'Party', value: 'party' },
+        { label: 'Gym', value: 'gym' },
+      ],
+    },
+  ],
+}
