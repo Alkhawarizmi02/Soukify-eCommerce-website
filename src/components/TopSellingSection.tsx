@@ -8,11 +8,16 @@ interface TopSellingResponse {
 }
 
 export default async function TopSellingSection() {
-  const res = await client.request<TopSellingResponse>(GET_TOP_SELLING, {
-    limit: 4,
-  })
+  let products: Product[] = []
 
-  const products = res.Products.docs
+  try {
+    const res = await client.request<TopSellingResponse>(GET_TOP_SELLING, {
+      limit: 4,
+    })
+    products = res.Products.docs
+  } catch (err) {
+    console.error("Failed to fetch top selling products:", err)
+  }
 
   return (
     <section className="w-full">

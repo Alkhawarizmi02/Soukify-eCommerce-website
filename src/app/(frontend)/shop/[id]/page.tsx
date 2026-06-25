@@ -108,6 +108,7 @@ export default async function ProductDetailPage({
               description={product.description}
               colors={product.colors}
               sizes={product.sizes}
+              imageUrl={imageUrl}
             />
           </React.Suspense>
         </div>

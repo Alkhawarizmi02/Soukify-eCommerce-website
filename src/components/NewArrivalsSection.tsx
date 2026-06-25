@@ -8,11 +8,16 @@ interface NewArrivalsResponse {
 }
 
 export default async function NewArrivalsSection() {
-  const res = await client.request<NewArrivalsResponse>(GET_NEW_ARRIVALS, {
-    limit: 4,
-  })
+  let products: Product[] = []
 
-  const products = res.Products.docs
+  try {
+    const res = await client.request<NewArrivalsResponse>(GET_NEW_ARRIVALS, {
+      limit: 4,
+    })
+    products = res.Products.docs
+  } catch (err) {
+    console.error("Failed to fetch new arrivals:", err)
+  }
 
   return (
     <section className="w-full">

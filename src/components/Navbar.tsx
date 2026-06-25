@@ -7,9 +7,11 @@ import Logo from './Logo'
 import DesktopNav from './Navs/DesktopNav'
 import MobileNav from './Navs/MobileNav'
 import { useState } from 'react'
+import { useCart } from '@/lib/CartContext'
 
 const Navbar = () => {
 
+  const { totalItems } = useCart()
   const router = useRouter()
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -44,8 +46,11 @@ const Navbar = () => {
           {/* Icons (ٍSearch & Cart & User) */}
           <div className="flex items-center gap-3.5">
             <MagnifyingGlassIcon onClick={() => setIsSearchOpen(!isSearchOpen)} className="h-6 w-6 stroke-2 cursor-pointer hover:stroke-gray-700" />
-            <Link href="/cart">
-              <ShoppingBagIcon className=" h-6 w-6 stroke-2 hover:stroke-gray-700" />
+            <Link href="/cart" className="relative">
+              <ShoppingBagIcon className="h-6 w-6 stroke-2 hover:stroke-gray-700" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 w-[10px] h-[10px] bg-red-500 rounded-full" />
+              )}
             </Link>
             <Link href="/account">
               <UserCircleIcon className="h-6 w-6 stroke-2 hover:stroke-gray-700" />
