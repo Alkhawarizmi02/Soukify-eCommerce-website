@@ -2,11 +2,13 @@
 
 import { ArrowRight, Tag } from "lucide-react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { useCart } from "@/lib/CartContext"
 
 const DELIVERY_FEE = 15
 
 export default function OrderSummary() {
+  const router = useRouter()
   const { subtotal } = useCart()
   const [promoCode, setPromoCode] = useState('')
   const [discount, setDiscount] = useState(0)
@@ -68,7 +70,11 @@ export default function OrderSummary() {
         </button>
       </div>
 
-      <button className="w-full bg-black text-white py-4 rounded-full flex items-center justify-center gap-3 hover:bg-gray-800 transition-colors font-satoshi font-bold mt-4 disabled:opacity-50 disabled:cursor-not-allowed" disabled={subtotal === 0}>
+      <button
+        onClick={() => router.push('/checkout')}
+        className="w-full bg-black text-white py-4 rounded-full flex items-center justify-center gap-3 hover:bg-gray-800 transition-colors font-satoshi font-bold mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled={subtotal === 0}
+      >
         Go to Checkout
         <ArrowRight className="w-5 h-5" />
       </button>

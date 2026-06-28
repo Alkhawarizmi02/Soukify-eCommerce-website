@@ -1,18 +1,16 @@
 import React from 'react'
-import './globals.css'
+import '../(frontend)/globals.css'
 import PromoBanner from '@/components/PromoBanner'
 import Navbar from '@/components/Navbar'
 import { CartProvider } from '@/lib/CartContext'
 import { AuthProvider } from '@/lib/AuthContext'
-import Footer from '@/components/Footer'
-import NewsletterSection from '@/components/NewsletterSection'
 
 export const metadata = {
-  description: 'Soukify is a modern and scalable e-commerce platform built with Next.js and Payload CMS, designed for seamless online shopping.',
-  title: 'Soukify',
+  title: 'Login - Soukify',
+  description: 'Sign in to your Soukify account',
 }
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
+export default async function AuthLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
@@ -23,8 +21,6 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <PromoBanner />
             <Navbar />
             <main>{children}</main>
-            <NewsletterSection />
-            <Footer />
           </CartProvider>
         </AuthProvider>
       </body>
