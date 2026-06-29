@@ -28,7 +28,7 @@ export default function ProductImageGallery({ mainImageUrl, productName }: Produ
                 : 'border-transparent hover:border-gray-300'
             }`}
           >
-            <img src={url} alt={`${productName} view ${i + 1}`} className="w-full h-full object-contain p-2" />
+            <img src={url} alt={`${productName} view ${i + 1}`} loading="lazy" className="w-full h-full object-contain p-2" />
           </button>
         ))}
       </div>
@@ -38,6 +38,7 @@ export default function ProductImageGallery({ mainImageUrl, productName }: Produ
         <img
           src={selectedImg}
           alt={productName}
+          loading="lazy"
           className="w-full h-full object-contain p-6 md:p-10"
         />
       </div>

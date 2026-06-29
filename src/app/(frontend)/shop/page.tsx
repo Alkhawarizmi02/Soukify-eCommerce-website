@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import client from '@/lib/graphql-client'
 import { GET_PRODUCTS } from '@/lib/queries'
 import FilterSidebar from '@/components/FilterSidebar'
 import ProductGrid from '@/components/ProductGrid'
 import ProductGridHeader from '@/components/ProductGridHeader'
 import Pagination from '@/components/Pagination'
+import ProductGridSkeleton from '@/components/ui/ProductGridSkeleton'
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
@@ -82,15 +83,17 @@ export default async function ShopPage({
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <div className="hidden lg:block w-72 flex-shrink-0">
-            <React.Suspense fallback={<div>Loading Filters...</div>}>
+            <Suspense fallback={<div>Loading Filters...</div>}>
               <FilterSidebar />
-            </React.Suspense>
+            </Suspense>
           </div>
 
           {/* Main Content */}
           <div className="flex-1">
             <ProductGridHeader category="Shop" />
-            <ProductGrid products={products} />
+            <Suspense fallback={<ProductGridSkeleton count={9} />}>
+              <ProductGrid products={products} />
+            </Suspense>
             <Pagination />
           </div>
         </div>

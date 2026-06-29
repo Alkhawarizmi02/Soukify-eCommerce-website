@@ -453,6 +453,7 @@ export default function AccountPage() {
                           <img
                             src={prod.image || '/placeholder.png'}
                             alt={prod.name}
+                            loading="lazy"
                             className="object-contain w-full h-full p-2"
                           />
                         </div>
@@ -548,6 +549,7 @@ export default function AccountPage() {
                             <img
                               src={item.product?.image?.url || '/placeholder.png'}
                               alt={item.product?.name || 'Product'}
+                              loading="lazy"
                               className="object-contain w-full h-full p-1"
                             />
                           </div>

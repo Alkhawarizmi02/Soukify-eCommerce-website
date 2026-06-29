@@ -120,15 +120,16 @@ export default function CheckoutForm({ onSuccess }: CheckoutFormProps) {
         })),
       }
 
-      const orderRes = await fetch('/api/orders', {
+      const orderRes = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(orderData),
       })
 
       if (!orderRes.ok) {
         const orderErr = await orderRes.json()
-        throw new Error(orderErr.errors?.[0]?.message || 'Failed to create order')
+        throw new Error(orderErr.error || 'Failed to create order')
       }
 
       clearCart()
@@ -269,7 +270,7 @@ export default function CheckoutForm({ onSuccess }: CheckoutFormProps) {
             {items.map((item) => (
               <div key={item.cartKey} className="flex gap-4">
                 <div className="w-16 h-16 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0">
-                  <img src={item.image} alt={item.name} className="object-contain w-full h-full p-1" />
+                  <img src={item.image} alt={item.name} loading="lazy" className="object-contain w-full h-full p-1" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-sm truncate">{item.name}</h4>

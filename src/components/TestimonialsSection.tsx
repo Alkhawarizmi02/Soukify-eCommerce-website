@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import client from '@/lib/graphql-client'
 import { GET_TESTIMONIALS } from '@/lib/queries'
 import { Star, CheckCircle2, ArrowLeft, ArrowRight } from 'lucide-react'
+import TestimonialsSkeleton from '@/components/ui/TestimonialsSkeleton'
 
 interface Testimonial {
   id: string
@@ -67,7 +68,7 @@ export default function TestimonialsSection() {
     })
   }
 
-  if (testimonials.length === 0) return null
+  if (testimonials.length === 0) return <TestimonialsSkeleton />
 
   return (
     <section className="w-full py-10 sm:py-20 overflow-hidden">
@@ -121,7 +122,7 @@ export default function TestimonialsSection() {
 
               {/* Comment */}
               <p className="text-sm sm:text-base text-gray-600 font-satoshi leading-relaxed">
-                "{t.comment}"
+                &ldquo;{t.comment}&rdquo;
               </p>
             </div>
           ))}

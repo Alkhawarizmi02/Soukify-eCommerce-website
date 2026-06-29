@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronRight } from 'lucide-react'
@@ -9,6 +9,7 @@ import ProductImageGallery from '@/components/ProductImageGallery'
 import ProductInfo from '@/components/ProductInfo'
 import ProductTabs from '@/components/ProductTabs'
 import ProductCard from '@/components/ProductCard'
+import ProductGridSkeleton from '@/components/ui/ProductGridSkeleton'
 import NewsletterSection from '@/components/NewsletterSection'
 import Footer from '@/components/Footer'
 
@@ -94,13 +95,14 @@ export default async function ProductDetailPage({
         {/* Product hero */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           {/* Gallery */}
-          <React.Suspense fallback={<div className="aspect-square bg-gray-100 rounded-[20px] animate-pulse" />}>
+          <Suspense fallback={<div className="aspect-square bg-gray-100 rounded-[20px] animate-pulse" />}>
             <ProductImageGallery mainImageUrl={imageUrl} productName={product.name} />
-          </React.Suspense>
+          </Suspense>
 
           {/* Info */}
-          <React.Suspense fallback={<div className="h-96 animate-pulse" />}>
+          <Suspense fallback={<div className="h-96 animate-pulse" />}>
             <ProductInfo
+              id={product.id}
               name={product.name}
               rating={rating}
               price={product.price}
@@ -110,29 +112,31 @@ export default async function ProductDetailPage({
               sizes={product.sizes}
               imageUrl={imageUrl}
             />
-          </React.Suspense>
+          </Suspense>
         </div>
 
         {/* Tabs: Details / Reviews / FAQs */}
-        <React.Suspense fallback={null}>
+        <Suspense fallback={null}>
           <ProductTabs
             description={product.description}
             reviews={placeholderReviews}
           />
-        </React.Suspense>
+        </Suspense>
 
         {/* You Might Also Like */}
         {similarProducts.length > 0 && (
-          <section className="mt-16">
-            <h2 className="text-2xl sm:text-3xl font-extrabold font-integralcf text-center mb-10 uppercase">
-              You Might Also Like
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-              {similarProducts.map((p) => (
-                <ProductCard key={p.id} product={p} />
-              ))}
-            </div>
-          </section>
+          <Suspense fallback={<ProductGridSkeleton count={4} />}>
+            <section className="mt-16">
+              <h2 className="text-2xl sm:text-3xl font-extrabold font-integralcf text-center mb-10 uppercase">
+                You Might Also Like
+              </h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                {similarProducts.map((p) => (
+                  <ProductCard key={p.id} product={p} />
+                ))}
+              </div>
+            </section>
+          </Suspense>
         )}
       </div>
 

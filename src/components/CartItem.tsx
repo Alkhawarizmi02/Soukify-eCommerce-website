@@ -10,7 +10,7 @@ export default function CartItem({ item }: { item: CartItemType }) {
     <div className="flex gap-4 py-6 border-b border-gray-100 last:border-0 first:pt-0">
       {/* Image */}
       <div className="w-24 h-24 sm:w-32 sm:h-32 bg-[#F0EEED] rounded-lg overflow-hidden flex-shrink-0">
-        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+        <img src={item.image} alt={item.name} loading="lazy" className="w-full h-full object-cover" />
       </div>
 
       {/* Details */}

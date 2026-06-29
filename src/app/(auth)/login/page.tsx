@@ -3,11 +3,11 @@
 import Logo from "@/components/Logo"
 import Image from 'next/image'
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useAuth } from "@/lib/AuthContext"
 import { useRouter, useSearchParams } from "next/navigation"
 
-function Page() {
+function LoginForm() {
   const { user, login, isLoading: authLoading } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -132,4 +132,10 @@ function Page() {
   )
 }
 
-export default Page
+export default function Page() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
+  )
+}

@@ -22,6 +22,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <img
           src={product.image?.url || '/placeholder.png'}
           alt={product.name}
+          loading="lazy"
           className="h-full w-full object-contain transition-transform duration-300 ease-out group-hover/card:scale-110"
         />
       </div>

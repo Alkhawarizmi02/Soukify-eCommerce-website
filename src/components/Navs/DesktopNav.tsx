@@ -65,6 +65,7 @@ function DesktopNav() {
               <img
                 src={currentImage}
                 alt={hoveredCategory}
+                loading="lazy"
                 className="w-full h-full object-cover rounded-md"
               />
             </div>

@@ -49,7 +49,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <h2 className="text-3xl font-extrabold font-integralcf mb-6">SOUKIFY</h2>
             <p className="text-gray-600 text-sm font-satoshi mb-8 max-w-[250px]">
-              We have clothes that suits your style and which you're proud to wear. From women to men.
+              We have clothes that suits your style and which you&apos;re proud to wear. From women to men.
             </p>
             <div className="flex gap-4">
               <Link href="#" className="p-2 bg-white rounded-full hover:bg-black hover:text-white transition-all">
