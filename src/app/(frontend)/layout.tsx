@@ -8,8 +8,23 @@ import Footer from '@/components/Footer'
 import NewsletterSection from '@/components/NewsletterSection'
 
 export const metadata = {
-  description: 'Soukify is a modern and scalable e-commerce platform built with Next.js and Payload CMS, designed for seamless online shopping.',
+  metadataBase: new URL('http://localhost:3000'),
   title: 'Soukify',
+  description: 'Soukify is a modern and scalable e-commerce platform built with Next.js and Payload CMS, designed for seamless online shopping.',
+  icons: {
+    icon: '/icon.svg',
+  },
+  openGraph: {
+    title: 'Soukify',
+    description: 'Soukify is a modern and scalable e-commerce platform built with Next.js and Payload CMS, designed for seamless online shopping.',
+    siteName: 'Soukify',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Soukify',
+    description: 'Soukify is a modern and scalable e-commerce platform built with Next.js and Payload CMS, designed for seamless online shopping.',
+  },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
