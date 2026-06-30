@@ -9,6 +9,8 @@ import ProductGridSkeleton from '@/components/ui/ProductGridSkeleton'
 import TestimonialsSkeleton from '@/components/ui/TestimonialsSkeleton'
 import Footer from "@/components/Footer";
 
+export const dynamic = 'force-dynamic'
+
 export default function HomePage() {
   return (
     <>
