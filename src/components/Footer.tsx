@@ -91,12 +91,26 @@ export default function Footer() {
           <p className="text-gray-600 text-sm font-satoshi">
             Soukify © 2000-2023, All Rights Reserved
           </p>
-          <div className="flex gap-2 items-center grayscale opacity-80">
-            <img src="/assets/Visa.png" alt="Visa" className="h-8 w-auto" />
-            <img src="/assets/Mastercard.png" alt="Mastercard" className="h-8 w-auto" />
-            <img src="/assets/Paypal.png" alt="PayPal" className="h-8 w-auto" />
-            <img src="/assets/Apple Pay.png" alt="Apple Pay" className="h-8 w-auto" />
-            <img src="/assets/G Pay.png" alt="Google Pay" className="h-8 w-auto" />
+          <div className="flex gap-3 items-center">
+              <div className="flex items-center justify-center bg-white border border-gray-100 rounded-md p-2 h-9 w-14 shadow-sm">
+                <img src="/assets/Visa.png" alt="Visa" className="max-h-full max-w-full object-contain" />
+              </div>
+              
+              <div className="flex items-center justify-center bg-white border border-gray-100 rounded-md p-2 h-9 w-14 shadow-sm">
+                <img src="/assets/Mastercard.png" alt="Mastercard" className="max-h-full max-w-full object-contain" />
+              </div>
+            
+              <div className="flex items-center justify-center bg-white border border-gray-100 rounded-md p-2 h-9 w-14 shadow-sm">
+                <img src="/assets/Paypal.png" alt="PayPal" className="max-h-full max-w-full object-contain" />
+              </div>
+            
+              <div className="flex items-center justify-center bg-white border border-gray-100 rounded-md p-2 h-9 w-14 shadow-sm">
+                <img src="/assets/Apple Pay.png" alt="Apple Pay" className="max-h-full max-w-full object-contain" />
+              </div>
+            
+              <div className="flex items-center justify-center bg-white border border-gray-100 rounded-md p-2 h-9 w-14 shadow-sm">
+                <img src="/assets/G Pay.png" alt="Google Pay" className="max-h-full max-w-full object-contain" />
+              </div>
           </div>
         </div>
       </div>
