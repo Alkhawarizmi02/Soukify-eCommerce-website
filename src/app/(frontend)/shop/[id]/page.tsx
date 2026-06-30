@@ -2,9 +2,9 @@ import React, { Suspense } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronRight } from 'lucide-react'
-import { getPayload } from 'payload'
-import config from '@/payload.config'
 
+import client from '@/lib/graphql-client'
+import { GET_PRODUCT_BY_ID, GET_PRODUCTS } from '@/lib/queries'
 import ProductImageGallery from '@/components/ProductImageGallery'
 import ProductInfo from '@/components/ProductInfo'
 import ProductTabs from '@/components/ProductTabs'
@@ -15,18 +15,24 @@ import Footer from '@/components/Footer'
 
 export const dynamic = 'force-dynamic'
 
-interface ProductData {
-  id: string
-  name: string
-  description?: string | null
-  rating?: number | null
-  price: number
-  discount?: number | null
-  category: string
-  colors?: string[] | null
-  sizes?: string[] | null
-  style?: string | null
-  image?: { url?: string | null } | null
+interface ProductResponse {
+  Product: {
+    id: string
+    name: string
+    description?: string | null
+    rating?: number | null
+    price: number
+    discount?: number | null
+    category: string
+    colors?: string[] | null
+    sizes?: string[] | null
+    style?: string | null
+    image?: { url?: string | null } | null
+  } | null
+}
+
+interface ProductsResponse {
+  Products: { docs: any[] }
 }
 
 export default async function ProductDetailPage({
@@ -36,16 +42,12 @@ export default async function ProductDetailPage({
 }) {
   const { id } = await params
 
-  let product: ProductData | null = null
+  let product: ProductResponse['Product'] = null
   let similarProducts: any[] = []
 
   try {
-    const payload = await getPayload({ config })
-    const res = await payload.findByID({
-      collection: 'products',
-      id,
-    })
-    product = res as unknown as ProductData
+    const res = await client.request<ProductResponse>(GET_PRODUCT_BY_ID, { id })
+    product = res.Product
   } catch (error) {
     console.error('Error fetching product:', error)
   }
@@ -56,13 +58,11 @@ export default async function ProductDetailPage({
 
   // Fetch similar products from same category (exclude current)
   try {
-    const payload = await getPayload({ config })
-    const res = await payload.find({
-      collection: 'products',
+    const res = await client.request<ProductsResponse>(GET_PRODUCTS, {
       limit: 5,
       where: { category: { equals: product.category } },
     })
-    similarProducts = res.docs.filter((p) => p.id !== id).slice(0, 4)
+    similarProducts = res.Products.docs.filter((p) => p.id !== id).slice(0, 4)
   } catch (error) {
     console.error('Error fetching similar products:', error)
   }

@@ -1,20 +1,20 @@
 import Link from "next/link"
-import { getPayload } from 'payload'
-import config from '@/payload.config'
+import client from "@/lib/graphql-client"
+import { GET_TOP_SELLING } from "@/lib/queries"
 import ProductCard, { Product } from "./ProductCard"
+
+interface TopSellingResponse {
+  Products: { docs: Product[] }
+}
 
 export default async function TopSellingSection() {
   let products: Product[] = []
 
   try {
-    const payload = await getPayload({ config })
-    const res = await payload.find({
-      collection: 'products',
-      where: { isTopSelling: { equals: true } },
+    const res = await client.request<TopSellingResponse>(GET_TOP_SELLING, {
       limit: 4,
-      sort: '-createdAt',
     })
-    products = res.docs as Product[]
+    products = res.Products.docs
   } catch (err) {
     console.error("Failed to fetch top selling products:", err)
   }

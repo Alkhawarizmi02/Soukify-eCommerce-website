@@ -1,20 +1,20 @@
 import Link from "next/link"
-import { getPayload } from 'payload'
-import config from '@/payload.config'
+import client from "@/lib/graphql-client"
+import { GET_NEW_ARRIVALS } from "@/lib/queries"
 import ProductCard, { Product } from "./ProductCard"
+
+interface NewArrivalsResponse {
+  Products: { docs: Product[] }
+}
 
 export default async function NewArrivalsSection() {
   let products: Product[] = []
 
   try {
-    const payload = await getPayload({ config })
-    const res = await payload.find({
-      collection: 'products',
-      where: { isNewArrival: { equals: true } },
+    const res = await client.request<NewArrivalsResponse>(GET_NEW_ARRIVALS, {
       limit: 4,
-      sort: '-createdAt',
     })
-    products = res.docs as Product[]
+    products = res.Products.docs
   } catch (err) {
     console.error("Failed to fetch new arrivals:", err)
   }
