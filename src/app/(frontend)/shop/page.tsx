@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
-import client from '@/lib/graphql-client'
-import { GET_PRODUCTS } from '@/lib/queries'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
 import FilterSidebar from '@/components/FilterSidebar'
 import ProductGrid from '@/components/ProductGrid'
 import ProductGridHeader from '@/components/ProductGridHeader'
@@ -8,14 +8,9 @@ import Pagination from '@/components/Pagination'
 import ProductGridSkeleton from '@/components/ui/ProductGridSkeleton'
 import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import type { Product } from '@/components/ProductCard'
 
 export const dynamic = 'force-dynamic'
-
-interface ProductsResponse {
-  Products: {
-    docs: any[]
-  }
-}
 
 export default async function ShopPage({
   searchParams,
@@ -24,9 +19,8 @@ export default async function ShopPage({
 }) {
   const params = await searchParams
   console.log('ShopPage Render with params:', params)
-  let products = []
+  let products: Product[] = []
 
-  // Build the 'where' clause for filtering
   const where: any = {}
 
   if (params.category) {
@@ -60,11 +54,13 @@ export default async function ShopPage({
   console.log('Built Where Clause:', JSON.stringify(where, null, 2))
 
   try {
-    const res = await client.request<ProductsResponse>(GET_PRODUCTS, {
+    const payload = await getPayload({ config })
+    const res = await payload.find({
+      collection: 'products',
       limit: 100,
       where,
     })
-    products = res.Products.docs
+    products = res.docs as Product[]
     console.log(`Fetched ${products?.length || 0} products`)
   } catch (error) {
     console.error('Error fetching products:', error)
