@@ -155,10 +155,7 @@ The easiest way to deploy is with **Vercel**.
 
 # 📸 Screenshots
 
-```
-/homepage.png
-
-```
+![Homepage](homepage.png)
 
 ---
 
