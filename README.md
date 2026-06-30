@@ -155,15 +155,11 @@ The easiest way to deploy is with **Vercel**.
 
 # 📸 Screenshots
 
-> Add screenshots here once the project is complete.
-
 ```
 /screenshots
 
-home.png
-product-page.png
-checkout.png
-dashboard.png
+homepage.png
+
 ```
 
 ---
