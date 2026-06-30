@@ -91,16 +91,12 @@ export default function Footer() {
           <p className="text-gray-600 text-sm font-satoshi">
             Soukify © 2000-2023, All Rights Reserved
           </p>
-          <div className="flex gap-4 items-center grayscale opacity-80">
-            {/* Using text placeholders/icons for payment methods as images aren't provided */}
-             <img src="/assets/payment-methods.png" alt="Payment Methods" className="h-8 hidden" />
-             <div className="flex gap-2">
-                <div className="bg-white px-2 py-1 rounded border border-gray-100 text-[10px] font-bold">VISA</div>
-                <div className="bg-white px-2 py-1 rounded border border-gray-100 text-[10px] font-bold">MasterCard</div>
-                <div className="bg-white px-2 py-1 rounded border border-gray-100 text-[10px] font-bold">PayPal</div>
-                <div className="bg-white px-2 py-1 rounded border border-gray-100 text-[10px] font-bold">Apple Pay</div>
-                <div className="bg-white px-2 py-1 rounded border border-gray-100 text-[10px] font-bold">Google Pay</div>
-             </div>
+          <div className="flex gap-2 items-center grayscale opacity-80">
+            <img src="/assets/Visa.png" alt="Visa" className="h-8 w-auto" />
+            <img src="/assets/Mastercard.png" alt="Mastercard" className="h-8 w-auto" />
+            <img src="/assets/Paypal.png" alt="PayPal" className="h-8 w-auto" />
+            <img src="/assets/Apple Pay.png" alt="Apple Pay" className="h-8 w-auto" />
+            <img src="/assets/G Pay.png" alt="Google Pay" className="h-8 w-auto" />
           </div>
         </div>
       </div>
